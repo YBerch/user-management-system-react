@@ -1,0 +1,16 @@
+.users-buttons-container {
+    float: right;
+    margin: 10px;
+}
+
+.users-table-container {
+    width: 100%;
+    padding: 10px;
+}
+
+.users-table {
+    width: 100%;
+    border: 1px solid #686868;
+    font-family: 'PT Sans Caption';
+    font-size: 15px;
+}

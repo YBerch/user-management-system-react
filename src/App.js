@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import logo from './logo.svg';
-import TestComponent from './components/TestComponent';
+import { connect } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
+import { authRoutes, nonAuthRoutes } from './routes';
 import './App.css';
 
 class App extends Component {
   render() {
+    let routes;
+    if(this.props.authorize && this.props.permission !== 'user'){
+      routes = authRoutes
+    } else {
+      routes = nonAuthRoutes;
+      this.props.history.push('/')
+    }
     return (
-      <div className="App">
-          <img src={logo} className="App-logo" alt="logo" />
-        <TestComponent/>
+      <div>
+        <ConnectedRouter history={this.props.history}>
+          {routes}
+        </ConnectedRouter>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ session }) => ({
+  authorize: session.authorize,
+  permission: session.user.permission
+});
+
+export default connect(
+  mapStateToProps
+)(App);

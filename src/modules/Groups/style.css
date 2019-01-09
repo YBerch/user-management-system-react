@@ -1,0 +1,16 @@
+.groups-buttons-container {
+    float: right;
+    margin: 10px;
+}
+
+.groups-table-container {
+    width: 100%;
+    padding: 10px;
+}
+
+.groups-table {
+    width: 100%;
+    border: 1px solid #686868;
+    font-family: 'PT Sans Caption';
+    font-size: 15px;
+}
