@@ -40,3 +40,32 @@ export const postCreateUser = (data: Object) => {
 
   return request(requestOptions, path);
 };
+
+/** update user
+ * @param data(object) - user credentials object **/
+export const patchUpdateUser = (data: Object) => {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+    body: JSON.stringify(data)
+  };
+
+  const path = `users/${data._id}`;
+
+  return request(requestOptions, path);
+};
+
+/** delete user
+ * @param data(string) - user id **/
+export const deleteUser = (data: string) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+  };
+
+  const path = `users/${data}`;
+
+  return request(requestOptions, path);
+};

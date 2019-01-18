@@ -3,32 +3,44 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getGroupsList } from '../../actions/actionCreators';
+import { getGroupsList, setCurrentPageGroups, clearGroupsData } from '../../actions/actionCreators';
 import CreateGroupModalTrigger from '../../components/ModalsTriggers/CreateGroup';
 import GroupItem from './GroupItem';
+import Pagination from '../../components/Pagination';
 import { uniqueKey } from "../../helpers";
 import './style.css';
 
 type Props = {
   getGroupsList: Function,
-  groupsList: Array<Object>,
-  createdGroup: boolean
+  setCurrentPageGroups: Function,
+  groupsData: Object,
+  currentPage: number
 };
 
 const Groups = (props: Props): React.Element<any> => {
 
   const [groupsList, setGroupsList]: [Array<Object>, Function] = useState([]);
 
-  if(props.groupsList !== groupsList){
-    setGroupsList(props.groupsList)
-  }
+  const setPage = page => {
+    props.setCurrentPageGroups(+page);
+  };
 
-  if(props.createdGroup){
-    props.getGroupsList();
-  }
-
+  /** execute when component did update **/
   useEffect(() => {
-    props.getGroupsList();
+    if(props.groupsData[props.currentPage]){
+      if(props.groupsData[props.currentPage] !== groupsList) {
+        setGroupsList(props.groupsData[props.currentPage])
+      }
+    } else {
+      props.getGroupsList({page: props.currentPage, size: 20});
+    }
+  }, [props.groupsData]);
+
+  /** execute  when component will unmount **/
+  useEffect(() => {
+    return () => {
+      props.setCurrentPageGroups(1);
+    }
   }, []);
 
   const showTable = () => {
@@ -58,21 +70,21 @@ const Groups = (props: Props): React.Element<any> => {
         <CreateGroupModalTrigger />
       </div>
       {showTable()}
+      <Pagination currentPage={props.currentPage} setPage={setPage} totalSize={props.groupsData.totalSize}/>
     </div>
   )
 };
 
-Groups.defaultProps = {
-  groupsList: []
-};
-
 const mapStateToProps = ({ groups }) => ({
-  groupsList: groups.data.list,
-  createdGroup: groups.createdGroup
+  groupsData: groups.data,
+  currentPage: groups.currentPage,
+  createdUser: groups.createdUser,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getGroupsList
+  getGroupsList,
+  setCurrentPageGroups,
+  clearGroupsData
 }, dispatch);
 
 export default connect(

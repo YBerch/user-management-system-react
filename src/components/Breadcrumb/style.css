@@ -1,0 +1,16 @@
+.breadcrumbs-container {
+    background-color: #fafafa;
+    /*margin: 0 20px;*/
+    /*border-top: 1px solid gray;*/
+    /*border-bottom: 1px solid gray;*/
+    height: 40px;
+    display: flex;
+    padding: 7px 20px;
+    color: #575757;
+    font-size: 15px;
+}
+
+.breadcrumbs-container a {
+    text-decoration: none;
+    padding: 0 10px;
+}

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUsersList, setCurrentPage, clearUsersData } from '../../actions/actionCreators';
+import { getUsersList, setCurrentPageUsers, clearUsersData } from '../../actions/actionCreators';
 import CreateUserModalTrigger from '../../components/ModalsTriggers/CreateUser';
 import UserItem from './UserItem';
 import Pagination from '../../components/Pagination';
@@ -12,20 +12,17 @@ import './style.css';
 
 type Props = {
   getUsersList: Function,
-  setCurrentPage: Function,
-  clearUsersData: Function,
+  setCurrentPageUsers: Function,
   usersData: Object,
-  createdUser: boolean,
   currentPage: number
 };
 
 const Users = (props: Props): React.Element<any> => {
 
   const [usersList, setUsersList]: [Array<Object>, Function] = useState([]);
-  // const [currentPage, setCurrentPage]: [number, Function] = useState(1);
 
   const setPage = page => {
-    props.setCurrentPage(+page);
+    props.setCurrentPageUsers(+page);
   };
 
   /** execute when component did update **/
@@ -35,22 +32,14 @@ const Users = (props: Props): React.Element<any> => {
         setUsersList(props.usersData[props.currentPage])
       }
     } else {
-      props.getUsersList({page: props.currentPage, size: 20});
+        props.getUsersList({page: props.currentPage, size: 20});
     }
-  });
-
-  /** execute when createdUser prop changes **/
-  useEffect(() => {
-    if(props.createdUser) {
-      props.clearUsersData();
-    }
-  }, [props.createdUser]);
+  }, [props.usersData]);
 
   /** execute  when component will unmount **/
   useEffect(() => {
     return () => {
-      props.setCurrentPage(1);
-      props.clearUsersData();
+      props.setCurrentPageUsers(1);
     }
   }, []);
 
@@ -93,12 +82,12 @@ const Users = (props: Props): React.Element<any> => {
 const mapStateToProps = ({ users }) => ({
   usersData: users.data,
   currentPage: users.currentPage,
-  createdUser: users.createdUser
+  createdUser: users.createdUser,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getUsersList,
-  setCurrentPage,
+  setCurrentPageUsers,
   clearUsersData
 }, dispatch);
 

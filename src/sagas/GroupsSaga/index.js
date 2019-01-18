@@ -2,8 +2,8 @@ import * as types from '../../actions/actionTypes';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { getGroupsList, getGroup, postCreateGroup } from '../../api/Groups';
 
-function* getGroupsListGen(){
-  const response = yield call(getGroupsList);
+function* getGroupsListGen(action){
+  const response = yield call(getGroupsList, action.data);
 
   const { data } = response;
 

@@ -13,6 +13,7 @@ import Group from '../components/Group';
 import Groups from '../modules/Groups';
 import NotFound from '../components/NotFound';
 import '../assets/main.css';
+import '../components/Breadcrumb/style.css';
 
 const Crumb = (): React.Element<any> => {
   return (
@@ -31,8 +32,8 @@ export const authRoutes = (
       <SideBar />
       <div id='main' className='content'>
         <Header />
-        <div>
-          <Breadcrumbs separator=" > " />
+        <div className='breadcrumbs-container'>
+          <Breadcrumbs separator="  >  " />
         </div>
         <Switch>
           <Route exact path='/' component={ Login } />

@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { history } from '../../../store';
-import { setCurrentGroup } from '../../../actions/actionCreators';
+import { history } from '../../../../store';
+import { setCurrentGroup } from '../../../../actions/actionCreators';
 
 type Props = {
   item: Object,

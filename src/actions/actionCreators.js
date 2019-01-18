@@ -8,15 +8,20 @@ export const createUser = (data: Object) => ({type: types.CREATE_USER_REQUEST, d
 export const clearCurrentUser = () => ({type: types.CLEAR_CURRENT_USER});
 export const clearUsersError = () => ({type: types.CLEAR_USERS_ERROR});
 export const clearUsersData = () => ({type: types.CLEAR_USERS_DATA});
-export const setCurrentPage = (data: number) => ({type: types.SET_CURRENT_PAGE, data});
+export const setCurrentPageUsers = (data: number) => ({type: types.SET_CURRENT_PAGE_USERS, data});
 export const setCurrentUser = (data: Object) => ({type: types.SET_CURRENT_USER, data});
+export const updateUser = (data: Object) => ({type: types.UPDATE_USER_REQUEST, data});
+export const deleteUser = (data: string) => ({type: types.DELETE_USER_REQUEST, data});
 
 /********** GROUPS **********/
-export const getGroupsList = () => ({type: types.GET_GROUPS_LIST_REQUEST});
+export const getGroupsList = (data: Object) => ({type: types.GET_GROUPS_LIST_REQUEST, data});
 export const getGroup = (data: string) => ({type: types.GET_GROUP_REQUEST, data});
 export const createGroup = (data: Object) => ({type: types.CREATE_GROUP_REQUEST, data});
 export const clearCurrentGroup = () => ({type: types.CLEAR_CURRENT_GROUP});
 export const clearGroupsError = () => ({type: types.CLEAR_GROUPS_ERROR});
+export const clearGroupsData = () => ({type: types.CLEAR_GROUPS_DATA});
+export const setCurrentPageGroups = (data: number) => ({type: types.SET_CURRENT_PAGE_GROUPS, data});
+export const setCurrentGroup = (data: Object) => ({type: types.SET_CURRENT_GROUP, data});
 
 /********** SESSION **********/
 export const login = (data: Object) => ({type: types.LOGIN_REQUEST, data});

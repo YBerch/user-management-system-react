@@ -18,7 +18,7 @@ const Header = (props: Props): React.Element<any> => {
 
   return (
     <div className="header">
-      <a href="#default" className="logo">User Managemant System</a>
+      <a href='/' className="logo">User Managemant System</a>
       <div className="header-right">
         <SearchBar />
         <a className="active" onClick={logout}>Logout</a>
