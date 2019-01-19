@@ -1,7 +1,8 @@
 // @flow
 import { request } from '../../api';
 
-/** get groups list **/
+/** get groups list
+ * @param data(object) - request parameters**/
 export const getGroupsList = (data: Object) => {
   const requestOptions = {
     method: 'GET',
@@ -18,7 +19,7 @@ export const getGroupsList = (data: Object) => {
 };
 
 /** get group by id
- * @param id(string)**/
+ * @param id(string) - group id**/
 export const getGroup = (id: string) => {
   const requestOptions = {
     method: 'GET',
