@@ -7,7 +7,8 @@ const initialState = {
   errorMessage: '',
   currentPage: 1,
   currentUser: null,
-  createdUser: false
+  createdUser: false,
+  deletedUser: false
 };
 
 type State = {
@@ -16,7 +17,8 @@ type State = {
   +errorMessage: string,
   +currentPage: number,
   +currentUser: Object,
-  +createdUser: boolean
+  +createdUser: boolean,
+  +deletedUser: boolean
 }
 
 type Action = {
@@ -38,6 +40,7 @@ export default function usersReducer(state: State = initialState, action: Action
         error: false,
         errorMessage: '',
         createdUser: false,
+        deletedUser: false
       };
     case types.GET_USERS_LIST_FAILURE:
       return {
@@ -45,7 +48,7 @@ export default function usersReducer(state: State = initialState, action: Action
         error: true,
         errorMessage: data.message
       };
-    case types.SET_CURRENT_PAGE:
+    case types.SET_CURRENT_PAGE_USERS:
       return {
         ...state,
         currentPage: data
@@ -94,6 +97,28 @@ export default function usersReducer(state: State = initialState, action: Action
         ...state,
         error: false,
         errorMessage: ''
+      };
+    case types.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: null
+      };
+    case types.UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
+    case types.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        deletedUser: true
+      };
+    case types.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
       };
     default:
       return state

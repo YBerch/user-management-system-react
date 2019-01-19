@@ -1,0 +1,15 @@
+.user-groups-container {
+    height: 500px;
+    margin: 20px;
+    border: 2px dashed #bbbbbb;
+    padding: 10px 10px 70px;
+}
+
+.empty-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    font-size: 25px;
+    font-weight: 600;
+    color: gray;
+}

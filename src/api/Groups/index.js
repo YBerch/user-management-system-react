@@ -2,13 +2,17 @@
 import { request } from '../../api';
 
 /** get groups list **/
-export const getGroupsList = () => {
+export const getGroupsList = (data: Object) => {
   const requestOptions = {
     method: 'GET',
     credentials: 'include',
   };
 
-  const path = 'groups';
+  let path = `groups?page=${data.page}&size=${data.size}`;
+
+  if(data.groups && data.groups instanceof Array && data.groups.length){
+    path += `&groups=${JSON.stringify(data.groups)}`
+  }
 
   return request(requestOptions, path);
 };
