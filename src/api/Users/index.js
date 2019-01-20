@@ -69,3 +69,20 @@ export const deleteUser = (data: string) => {
 
   return request(requestOptions, path);
 };
+
+/** delete user
+* @param data.userId(string) - user id
+* @param data.groupId(string) - group id
+ * **/
+export const deleteGroupFromUser = (data: Object) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+    body: JSON.stringify(data)
+  };
+
+  const path = `users/group/${data.userId}`;
+
+  return request(requestOptions, path);
+};

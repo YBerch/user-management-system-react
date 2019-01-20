@@ -82,7 +82,7 @@ const CreateUserModal = (props: Props): React.Element<any> => {
             <input name='email' placeholder='email'/>
             <input name='phone' placeholder='phone'/>
             <input name='permission' placeholder='permission'/>
-            <input name='groups' placeholder='groups'/>
+            <input name='groups' placeholder='groups' defaultValue='5c3cae6af1c6b00e2cab3b2b,5c3cae6af1c6b00e2cab3b2d,5c3cae6af1c6b00e2cab3b2c,5c3cae6af1c6b00e2cab3b2e'/>
             <input name='password' placeholder='password'/>
             <button onClick={onSubmit}>Create</button>
           </form>

@@ -34,7 +34,7 @@ const Users = (props: Props): React.Element<any> => {
     } else {
         props.getUsersList({page: props.currentPage, size: 20});
     }
-  }, [props.usersData]);
+  }, [props.usersData, props.currentPage]);
 
   /** execute  when component will unmount **/
   useEffect(() => {

@@ -7,18 +7,18 @@ import { updateUser } from '../../../actions/actionCreators';
 import './style.css';
 
 type Props = {
-  data: Object,
+  currentUser: Object,
   updateUser: Function
 };
 
-const Info = ({data, ...props}: Props): React.Element<any> => {
+const Info = ({currentUser, ...props}: Props): React.Element<any> => {
 
   const [editState, setEditState]: [boolean, Function] = useState(false);
   const [updateData, setUpdateData]: [Object, Function] = useState({});
 
   useEffect(() => {
-    setUpdateData(data)
-  }, [data]);
+    setUpdateData(currentUser)
+  }, [currentUser]);
 
   const onChange = e => {
     e.preventDefault();
@@ -53,7 +53,7 @@ const Info = ({data, ...props}: Props): React.Element<any> => {
     <div className='user-info-container'>
       <div onClick={onEditButton} className='edit-button'>
         Edit
-        <i className="fa fa-fw fa-edit"></i>
+        <i className="fa fa-fw fa-edit"> </i>
       </div>
       <div className={`user-info ${editState ? 'edit' : ''}`} onChange={onChange}>
         <span>First name:</span>

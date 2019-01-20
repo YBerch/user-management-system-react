@@ -27,7 +27,6 @@ type Props = {
 const User = (props: Props): React.Element<any> => {
 
   const [currentUser, setCurrentUser]: [Object, Function] = useState({});
-  const [currentTab, setCurrentTab]: [string, Function] = useState('info');
 
   useEffect(() => {
 
@@ -52,19 +51,18 @@ const User = (props: Props): React.Element<any> => {
   }, [props.deletedUser, props.error]);
 
   const showContent = () => {
-    return <div className='row'>
-      <div className='column left'>
-        <Info data={currentUser}/>
+    if(Object.keys(currentUser).length) {
+      return <div className='row'>
+        <div className='column left'>
+          <div className='user-title'>User Info:</div>
+          <Info currentUser={currentUser}/>
+        </div>
+        <div className='column right'>
+          <div className='user-title'>User Groups:</div>
+          <UserGroups currentUser={currentUser}/>
+        </div>
       </div>
-      <div className='column right'>
-        <UserGroups data={currentUser.groups || []}/>
-      </div>
-    </div>
-  };
-
-  const onChooseTab = e => {
-    e.preventDefault();
-    setCurrentTab(e.target.id)
+    }
   };
 
   const onDeleteUser = e => {
@@ -74,10 +72,6 @@ const User = (props: Props): React.Element<any> => {
 
   return(
     <div>
-      <div onClick={onChooseTab} className='tabs-container'>
-        <div className={`tab ${currentTab === 'info' ? 'active' : ''}`} id='info'>Info</div>
-        {/*<div className={`tab ${currentTab === 'groups' ? 'active' : ''}`} id='groups'>Groups</div>*/}
-      </div>
       <div className='user-content'>
         {showContent()}
       </div>
