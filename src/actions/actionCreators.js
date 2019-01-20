@@ -4,6 +4,8 @@ import * as types from './actionTypes';
 /********** USERS **********/
 export const getUsersList = (data: Object) => ({type: types.GET_USERS_LIST_REQUEST, data});
 export const getUser = (data: string) => ({type: types.GET_USER_REQUEST, data});
+export const getGroupsByUser = (data: Object) => ({type: types.GET_GROUPS_BY_USER_REQUEST, data});
+export const removeGroupFromUser = (data: string) => ({type: types.REMOVE_GROUP_FROM_USER_REQUEST, data});
 export const createUser = (data: Object) => ({type: types.CREATE_USER_REQUEST, data});
 export const clearCurrentUser = () => ({type: types.CLEAR_CURRENT_USER});
 export const clearUsersError = () => ({type: types.CLEAR_USERS_ERROR});

@@ -4,29 +4,33 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { history } from '../../../../store';
 import { setCurrentGroup } from '../../../../actions/actionCreators';
+import { getRandomColor } from '../../../../helpers';
+import './style.css';
 
 type Props = {
   item: Object,
   index: number,
-  setCurrentGroup: Function
+  setCurrentGroup: Function,
+  removeGroupFromUser: Function
 }
 
 const GroupItem = ({item, index, ...props}: Props): React.Element<any> => {
 
-  const userSelect = e => {
+  const groupSelect = e => {
     e.preventDefault();
     props.setCurrentGroup(item);
     history.push(`/groups/${item._id}`)
   };
 
   return (
-    <tr>
-      <td>{index+1}</td>
-      <td>
-        <div onClick={userSelect}>{item.name}</div>
-      </td>
-      <td>{new Date(item.created).toISOString().substring(0, 10)}</td>
-    </tr>
+    <li className="w3-bar">
+      <span onClick={(e) => props.removeGroupFromUser(e, item._id)} className="close-button w3-xlarge w3-right">&times;</span>
+      <div className='group-logo' style={{backgroundColor: getRandomColor()}}>{item.name[0].toUpperCase()}</div>
+      <div onClick={groupSelect} className="w3-bar-item">
+        <span className="w3-large">{item.name}</span><br/>
+        <span>Web Designer</span>
+      </div>
+    </li>
   )
 };
 

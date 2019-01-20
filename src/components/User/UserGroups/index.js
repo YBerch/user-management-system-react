@@ -1,80 +1,59 @@
 // @flow
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateUser } from '../../../actions/actionCreators';
+import { updateUser, getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
 import GroupItem from './GroupItem';
 import { uniqueKey } from '../../../helpers';
 import './style.css';
+import {useState} from "react";
 
 type Props = {
-  data: Object,
-  updateUser: Function
+  currentUser: Object,
+  usersGroups: Object,
+  updateUser: Function,
+  getGroupsByUser: Function,
+  removeGroupFromUser: Function
 };
 
-const UserGroups = ({data, ...props}: Props): React.Element<any> => {
+const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
 
-  const [editState, setEditState]: [boolean, Function] = useState(false);
-  const [updateData, setUpdateData]: [Object, Function] = useState({});
+  const [user, setUpdateData]: [Object, Function] = useState({});
 
   useEffect(() => {
-    setUpdateData(data)
-  }, [data]);
+    setUpdateData(currentUser);
 
-  const onChange = e => {
-    e.preventDefault();
-    setUpdateData({
-      ...updateData,
-      [e.target.name]: e.target.value
-    })
-  };
-
-  const onEditButton = e => {
-    e.preventDefault();
-    setEditState(!editState);
-    console.log(updateData)
-  };
-
-  const onSave = e => {
-    e.preventDefault();
-    props.updateUser(updateData)
-  };
-
-  const showSaveButton = () => {
-    if(editState){
-      return (
-        <div onClick={onSave} className='save-button'>
-          Save
-        </div>
-      )
+    if(!props.usersGroups[currentUser._id]) {
+      props.getGroupsByUser({id: currentUser._id, groups: {groups: currentUser.groups}});
     }
+  }, [currentUser]);
+
+  const removeGroupFromUser = (e, groupId) => {
+    e.preventDefault();
+    props.removeGroupFromUser({userId: user._id, groupId})
   };
 
   const showTable = () => {
-    if(data.length){
+    if(props.usersGroups[user._id] && props.usersGroups[user._id].length){
       return (
-        <table className='groups-table' border="true">
-          <thead>
-          <tr>
-            <td>#</td>
-            <td>Name</td>
-            <td>Created</td>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            data.map((item, index): React.Element<any> => <GroupItem key={uniqueKey()} item={item} index={index}/>)
-          }
-          </tbody>
-        </table>
+        <div>
+          <ul className="w3-ul w3-card-4">
+            {
+              props.usersGroups[user._id].map((item, index): React.Element<any> => (
+                  <GroupItem key={uniqueKey()} item={item} index={index} removeGroupFromUser={removeGroupFromUser}/>
+                )
+              )
+            }
+          </ul>
+        </div>
       )
     } else {
       return (
         <div className='empty-list'>Groups list empty</div>
       )
     }
-  }
+  };
 
   return (
     <div className='user-groups-container'>
@@ -83,11 +62,17 @@ const UserGroups = ({data, ...props}: Props): React.Element<any> => {
   )
 };
 
+const mapStateToProps = ({users}) => ({
+  usersGroups: users.usersGroups
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateUser
+  updateUser,
+  getGroupsByUser,
+  removeGroupFromUser
 }, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UserGroups);

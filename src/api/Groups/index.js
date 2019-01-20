@@ -9,10 +9,14 @@ export const getGroupsList = (data: Object) => {
     credentials: 'include',
   };
 
-  let path = `groups?page=${data.page}&size=${data.size}`;
+  let path = `groups?`;
 
-  if(data.groups && data.groups instanceof Array && data.groups.length){
-    path += `&groups=${JSON.stringify(data.groups)}`
+  if(data.page && data.size){
+    path += `page=${data.page}&size=${data.size}`
+  }
+
+  if(data.groups && data.groups instanceof Array){
+    path += `${data.page && data.size ? '&' : ''}groups=${JSON.stringify(data.groups)}`;
   }
 
   return request(requestOptions, path);

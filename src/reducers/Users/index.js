@@ -3,6 +3,7 @@ import * as types from '../../actions/actionTypes';
 
 const initialState = {
   data: {},
+  usersGroups: {},
   error: false,
   errorMessage: '',
   currentPage: 1,
@@ -13,6 +14,7 @@ const initialState = {
 
 type State = {
   +data: Object,
+  +usersGroups: Object,
   +error: boolean,
   +errorMessage: string,
   +currentPage: number,
@@ -23,7 +25,8 @@ type State = {
 
 type Action = {
   +type: string,
-  +data: Object
+  +data: Object,
+  +userId: string
 }
 
 export default function usersReducer(state: State = initialState, action: Action): State {
@@ -71,6 +74,34 @@ export default function usersReducer(state: State = initialState, action: Action
         error: true,
         errorMessage: data.message
       };
+    case types.GET_GROUPS_BY_USER_SUCCESS:
+      return {
+        ...state,
+        usersGroups: {
+          ...state.usersGroups,
+          [action.userId]: data
+        }
+      };
+    case types.GET_GROUPS_BY_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
+    case types.REMOVE_GROUP_FROM_USER_SUCCESS:
+      return {
+        ...state,
+        usersGroups: {
+          ...state.usersGroups,
+          [data.userId]: null
+        }
+      };
+    case types.REMOVE_GROUP_FROM_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
     case types.CREATE_USER_SUCCESS:
       return {
         ...state,
@@ -85,7 +116,8 @@ export default function usersReducer(state: State = initialState, action: Action
     case types.CLEAR_USERS_DATA:
       return {
         ...state,
-        data: {}
+        data: {},
+        currentUser: null
       };
     case types.CLEAR_CURRENT_USER:
       return {

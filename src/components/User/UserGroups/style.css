@@ -1,8 +1,5 @@
 .user-groups-container {
-    height: 500px;
     margin: 20px;
-    border: 2px dashed #bbbbbb;
-    padding: 10px 10px 70px;
 }
 
 .empty-list {
