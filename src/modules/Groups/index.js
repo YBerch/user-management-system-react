@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getGroupsList, setCurrentPageGroups, clearGroupsData } from '../../actions/actionCreators';
+import { getGroupsList, setCurrentPageGroups } from '../../actions/actionCreators';
 import CreateGroupModalTrigger from '../../components/ModalsTriggers/CreateGroup';
 import GroupItem from './GroupItem';
 import Pagination from '../../components/Pagination';
@@ -20,6 +20,7 @@ type Props = {
 const Groups = (props: Props): React.Element<any> => {
 
   const [groupsList, setGroupsList]: [Array<Object>, Function] = useState([]);
+  const size = 20;
 
   const setPage = page => {
     props.setCurrentPageGroups(+page);
@@ -32,9 +33,9 @@ const Groups = (props: Props): React.Element<any> => {
         setGroupsList(props.groupsData[props.currentPage])
       }
     } else {
-      props.getGroupsList({page: props.currentPage, size: 20});
+      props.getGroupsList({page: props.currentPage, size});
     }
-  }, [props.groupsData]);
+  }, [props.groupsData, props.currentPage]);
 
   /** execute  when component will unmount **/
   useEffect(() => {
@@ -70,7 +71,7 @@ const Groups = (props: Props): React.Element<any> => {
         <CreateGroupModalTrigger />
       </div>
       {showTable()}
-      <Pagination currentPage={props.currentPage} setPage={setPage} totalSize={props.groupsData.totalSize}/>
+      <Pagination currentPage={props.currentPage} setPage={setPage} totalSize={props.groupsData.totalSize} size={size}/>
     </div>
   )
 };
@@ -83,8 +84,7 @@ const mapStateToProps = ({ groups }) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getGroupsList,
-  setCurrentPageGroups,
-  clearGroupsData
+  setCurrentPageGroups
 }, dispatch);
 
 export default connect(

@@ -20,6 +20,7 @@ type Props = {
 const Users = (props: Props): React.Element<any> => {
 
   const [usersList, setUsersList]: [Array<Object>, Function] = useState([]);
+  const size = 20;
 
   const setPage = page => {
     props.setCurrentPageUsers(+page);
@@ -32,7 +33,7 @@ const Users = (props: Props): React.Element<any> => {
         setUsersList(props.usersData[props.currentPage])
       }
     } else {
-        props.getUsersList({page: props.currentPage, size: 20});
+        props.getUsersList({page: props.currentPage, size});
     }
   }, [props.usersData, props.currentPage]);
 
@@ -74,7 +75,7 @@ const Users = (props: Props): React.Element<any> => {
         <CreateUserModalTrigger />
       </div>
       {showTable()}
-      <Pagination currentPage={props.currentPage} setPage={setPage} totalSize={props.usersData.totalSize}/>
+      <Pagination currentPage={props.currentPage} setPage={setPage} totalSize={props.usersData.totalSize} size={size}/>
     </div>
   )
 };

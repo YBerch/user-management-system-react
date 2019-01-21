@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateUser, getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
 import GroupItem from './GroupItem';
+import AddGroupsToUser from '../../../components/ModalsTriggers/AddGroupsToUser';
 import { uniqueKey } from '../../../helpers';
 import './style.css';
 import {useState} from "react";
@@ -19,10 +20,10 @@ type Props = {
 
 const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
 
-  const [user, setUpdateData]: [Object, Function] = useState({});
+  const [user, setUser]: [Object, Function] = useState({});
 
   useEffect(() => {
-    setUpdateData(currentUser);
+    setUser(currentUser);
 
     if(!props.usersGroups[currentUser._id]) {
       props.getGroupsByUser({id: currentUser._id, groups: {groups: currentUser.groups}});
@@ -38,6 +39,7 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
     if(props.usersGroups[user._id] && props.usersGroups[user._id].length){
       return (
         <div>
+          <AddGroupsToUser />
           <ul className="w3-ul w3-card-4">
             {
               props.usersGroups[user._id].map((item, index): React.Element<any> => (

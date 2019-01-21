@@ -9,7 +9,8 @@ const initialState = {
   currentPage: 1,
   currentUser: null,
   createdUser: false,
-  deletedUser: false
+  deletedUser: false,
+  addedGroup: false
 };
 
 type State = {
@@ -20,7 +21,8 @@ type State = {
   +currentPage: number,
   +currentUser: Object,
   +createdUser: boolean,
-  +deletedUser: boolean
+  +deletedUser: boolean,
+  +addedGroup: boolean
 }
 
 type Action = {
@@ -65,6 +67,7 @@ export default function usersReducer(state: State = initialState, action: Action
       return {
         ...state,
         currentUser: data,
+        addedGroup: false,
         error: false,
         errorMessage: ''
       };
@@ -97,6 +100,21 @@ export default function usersReducer(state: State = initialState, action: Action
         }
       };
     case types.REMOVE_GROUP_FROM_USER_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
+    case types.ADD_GROUP_TO_USR_SUCCESS:
+      return {
+        ...state,
+        addedGroup: true,
+        usersGroups: {
+          ...state.usersGroups,
+          [data.userId]: null
+        }
+      };
+    case types.ADD_GROUP_TO_USR_FAILURE:
       return {
         ...state,
         error: true,
