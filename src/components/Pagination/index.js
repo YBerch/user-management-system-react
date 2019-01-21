@@ -5,6 +5,7 @@ import './style.css';
 type Props = {
   currentPage: number,
   totalSize: number,
+  size: number,
   setPage: Function,
 }
 
@@ -15,7 +16,7 @@ const Pagination = (props: Props) => {
   };
 
 const pages = () => {
-  const pagesCount = props.totalSize / 20;
+  const pagesCount = props.totalSize / props.size;
   const pages = [];
   for(let i = 0; i<pagesCount; i++){
     pages.push(

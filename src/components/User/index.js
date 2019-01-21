@@ -42,7 +42,7 @@ const User = (props: Props): React.Element<any> => {
   }, [props.currentUser]);
 
   useEffect(() => {
-    props.deletedUser && props.history.push('/users')
+    props.deletedUser && props.history.push('/users');
     if(props.error){
       props.clearUsersError();
       props.showModal(types.MODAL_TYPE_ERROR, {message: props.errorMessage});
@@ -52,16 +52,23 @@ const User = (props: Props): React.Element<any> => {
 
   const showContent = () => {
     if(Object.keys(currentUser).length) {
-      return <div className='row'>
-        <div className='column left'>
-          <div className='user-title'>User Info:</div>
-          <Info currentUser={currentUser}/>
+      return (
+        <div>
+          <div className='row'>
+            <div className='column left'>
+              <div className='user-title'>User Info:</div>
+              <Info currentUser={currentUser}/>
+            </div>
+            <div className='column right'>
+              <div className='user-title'>User Groups:</div>
+              <UserGroups currentUser={currentUser}/>
+            </div>
+          </div>
+          <div onClick={onDeleteUser} className={`delete-button ${currentUser.groups.length ? 'disabled' : ''}`}>
+            Delete user
+          </div>
         </div>
-        <div className='column right'>
-          <div className='user-title'>User Groups:</div>
-          <UserGroups currentUser={currentUser}/>
-        </div>
-      </div>
+      )
     }
   };
 
@@ -74,9 +81,6 @@ const User = (props: Props): React.Element<any> => {
     <div>
       <div className='user-content'>
         {showContent()}
-      </div>
-      <div onClick={onDeleteUser} className='delete-button'>
-        Delete user
       </div>
     </div>
   )

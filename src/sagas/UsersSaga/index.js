@@ -6,7 +6,9 @@ import {
   postCreateUser,
   patchUpdateUser,
   deleteUser,
-  deleteGroupFromUser } from '../../api/Users';
+  deleteGroupFromUser,
+  putGroupToUser
+} from '../../api/Users';
 import { getGroupsList } from '../../api/Groups';
 
 function* getUsersListGen(action){
@@ -92,6 +94,18 @@ function* removeGroupFromUser(action) {
   }
 }
 
+function* addGroupToUser(action) {
+  const response = yield call(putGroupToUser, action.data);
+
+  const { data } = response;
+
+  if(response.status === 200){
+    yield put({type: types.ADD_GROUP_TO_USR_SUCCESS, data});
+  } else {
+    yield put({type: types.ADD_GROUP_TO_USR_FAILURE, data});
+  }
+}
+
 function* usersSaga(){
   yield takeLatest(types.GET_USERS_LIST_REQUEST, getUsersListGen);
   yield takeLatest(types.GET_USER_REQUEST, getUserGen);
@@ -99,7 +113,8 @@ function* usersSaga(){
   yield takeLatest(types.CREATE_USER_REQUEST, createUser);
   yield takeLatest(types.UPDATE_USER_REQUEST, updateUser);
   yield takeLatest(types.DELETE_USER_REQUEST, deleteUserGen);
-  yield takeLatest(types.REMOVE_GROUP_FROM_USER_REQUEST, removeGroupFromUser)
+  yield takeLatest(types.REMOVE_GROUP_FROM_USER_REQUEST, removeGroupFromUser);
+  yield takeLatest(types.ADD_GROUP_TO_USR_REQUEST, addGroupToUser)
 }
 
 export default usersSaga;

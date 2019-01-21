@@ -1,0 +1,18 @@
+.add-groups-button {
+    float: right;
+    font-size: 20px;
+    margin: -55px 0 15px 20px;
+    padding: 5px 20px;
+    background-color: whitesmoke;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    color: #494949;
+}
+
+.add-groups-button:hover {
+    cursor: pointer;
+}
+
+.add-groups-button i {
+    margin-right: 8px;
+}
