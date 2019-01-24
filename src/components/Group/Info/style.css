@@ -1,0 +1,67 @@
+.user-info-container {
+    margin: 20px;
+}
+
+.user-info-container .edit-button {
+    font-size: 20px;
+    float: right;
+    color: gray;
+    margin: -40px 0 15px 20px;
+}
+
+.user-info {
+    margin-top: 50px;
+}
+
+.user-info-container .edit-button:hover {
+    cursor: pointer;
+}
+
+.user-info input {
+    display: flex;
+    border: none;
+    pointer-events: none;
+    margin-bottom: 20px;
+    /*padding-left: 10px;*/
+    font-size: 30px;
+    /*font-weight: bold;*/
+    color: #3b3b3b;
+}
+
+.user-info span {
+    font-size: 20px;
+    color: #3b3b3b;
+}
+
+.edit input {
+    border: 1px solid #bbbbbb;
+    padding-left: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    pointer-events: auto;
+}
+
+.edit input:focus {
+    outline: none;
+}
+
+.save-button {
+    background-color: whitesmoke;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    /*float: right;*/
+    font-size: 25px;
+    margin-top: 50px;
+    line-height: 50px;
+    border: 1px solid #adadad;
+    border-radius: 8px;
+    bottom: 20px;
+    /*margin-right: 10px;*/
+    color: #3b3b3b;
+}
+
+.save-button:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+}

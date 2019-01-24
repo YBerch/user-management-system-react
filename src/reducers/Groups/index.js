@@ -82,7 +82,8 @@ export default function groupsReducer(state: State = initialState, action: Actio
     case types.CLEAR_GROUPS_DATA:
       return {
         ...state,
-        data: {}
+        data: {},
+        currentUser: null
       };
     case types.CLEAR_CURRENT_GROUP:
       return {
@@ -94,6 +95,17 @@ export default function groupsReducer(state: State = initialState, action: Actio
         ...state,
         error: false,
         errorMessage: ""
+      };
+    case types.UPDATE_GROUP_SUCCESS:
+      return {
+        ...state,
+        currentGroup: null
+      };
+    case types.UPDATE_GROUP_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
       };
     default:
       return state

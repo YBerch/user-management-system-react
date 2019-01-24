@@ -11,24 +11,24 @@ import './style.css';
 import {useState} from "react";
 
 type Props = {
-  currentUser: Object,
+  currentGroup: Object,
   usersGroups: Object,
   updateUser: Function,
   getGroupsByUser: Function,
   removeGroupFromUser: Function
 };
 
-const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
+const UserGroups = ({currentGroup, ...props}: Props): React.Element<any> => {
 
   const [user, setUser]: [Object, Function] = useState({});
 
   useEffect(() => {
-    setUser(currentUser);
+    setUser(currentGroup);
 
-    if(!props.usersGroups[currentUser._id]) {
-      props.getGroupsByUser({id: currentUser._id, groups: {groups: currentUser.groups}});
+    if(!props.usersGroups[currentGroup._id]) {
+      props.getGroupsByUser({id: currentGroup._id, groups: {groups: currentGroup.groups}});
     }
-  }, [currentUser]);
+  }, [currentGroup]);
 
   const removeGroupFromUser = (e, groupId) => {
     e.preventDefault();

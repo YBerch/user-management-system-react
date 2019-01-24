@@ -25,6 +25,7 @@ export const clearGroupsError = () => ({type: types.CLEAR_GROUPS_ERROR});
 export const clearGroupsData = () => ({type: types.CLEAR_GROUPS_DATA});
 export const setCurrentPageGroups = (data: number) => ({type: types.SET_CURRENT_PAGE_GROUPS, data});
 export const setCurrentGroup = (data: Object) => ({type: types.SET_CURRENT_GROUP, data});
+export const updateGroup = (data: Object) => ({type: types.UPDATE_GROUP_REQUEST, data});
 
 /********** SESSION **********/
 export const login = (data: Object) => ({type: types.LOGIN_REQUEST, data});

@@ -49,3 +49,18 @@ export const postCreateGroup = (data: Object) => {
 
   return request(requestOptions, path);
 };
+/** update group
+ * @param data(object) - group credentials object **/
+export const patchUpdateGroup = (data: Object) => {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+    body: JSON.stringify(data)
+  };
+
+  const path = `groups/${data._id}`;
+
+  return request(requestOptions, path);
+};
+

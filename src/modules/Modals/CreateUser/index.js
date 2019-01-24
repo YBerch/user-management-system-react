@@ -77,13 +77,13 @@ const CreateUserModal = (props: Props): React.Element<any> => {
         </div>
         <div className="modal-body">
           <form onChange={onChange} className='modal-create-user-form'>
-            <input name='firstName' placeholder='first name'/>
-            <input name='lastName' placeholder='last name'/>
+            <input name='firstName' placeholder='first name' defaultValue='test'/>
+            <input name='lastName' placeholder='last name' defaultValue='test'/>
             <input name='email' placeholder='email'/>
             <input name='phone' placeholder='phone'/>
-            <input name='permission' placeholder='permission'/>
-            <input name='groups' placeholder='groups' defaultValue='5c3cae6af1c6b00e2cab3b2b,5c3cae6af1c6b00e2cab3b2d,5c3cae6af1c6b00e2cab3b2c,5c3cae6af1c6b00e2cab3b2e'/>
-            <input name='password' placeholder='password'/>
+            <input name='permission' placeholder='permission' defaultValue='user'/>
+            <input name='groups' placeholder='groups' defaultValue='5c35e70976f6e5d76be76f8b,5c35e70976f6e5d76be76f8e,5c35e70976f6e5d76be76f8d,5c35e70976f6e5d76be76f8c'/>
+            <input name='password' placeholder='password' defaultValue='test'/>
             <button onClick={onSubmit}>Create</button>
           </form>
         </div>
