@@ -38,7 +38,7 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
   const showTable = () => {
     if(props.usersGroups[user._id] && props.usersGroups[user._id].length){
       return (
-        <div>
+        <div className='user-groups-table'>
           <ul className="w3-ul w3-card-4">
             {
               props.usersGroups[user._id].map((item, index): React.Element<any> => (
