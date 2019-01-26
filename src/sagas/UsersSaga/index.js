@@ -88,7 +88,7 @@ function* removeGroupFromUser(action) {
   const { data } = response;
 
   if(response.status === 200){
-    yield put({type: types.REMOVE_GROUP_FROM_USER_SUCCESS, data});
+    yield put({type: types.REMOVE_GROUP_FROM_USER_SUCCESS, data, groupId: action.data.groupId});
   } else {
     yield put({type: types.REMOVE_GROUP_FROM_USER_FAILURE, data});
   }
@@ -100,7 +100,7 @@ function* addGroupToUser(action) {
   const { data } = response;
 
   if(response.status === 200){
-    yield put({type: types.ADD_GROUP_TO_USR_SUCCESS, data});
+    yield put({type: types.ADD_GROUP_TO_USR_SUCCESS, data, groupId: action.data.groupId});
   } else {
     yield put({type: types.ADD_GROUP_TO_USR_FAILURE, data});
   }

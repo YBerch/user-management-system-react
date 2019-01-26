@@ -8,7 +8,11 @@ export const getUsersList = (data: Object) => {
     credentials: 'include',
   };
 
-  const path = `users?page=${data.page}&size=${data.size}`;
+  let path = `users?page=${data.page}&size=${data.size}`;
+
+  if(data.groupId){
+    path += `&groupId=${data.groupId}`
+  }
 
   return request(requestOptions, path);
 };

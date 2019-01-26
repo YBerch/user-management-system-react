@@ -3,25 +3,30 @@ import * as types from '../../actions/actionTypes';
 
 const initialState = {
   data: {},
+  groupUsers: {},
   error: false,
   errorMessage: '',
   currentPage: 1,
   currentGroup: null,
-  createdGroup: false
+  createdGroup: false,
+  deletedGroup: false
 };
 
 type State = {
   +data: Object,
+  +groupUsers: Object,
   +error: boolean,
   +errorMessage: string,
   +currentPage: number,
   +currentGroup: Object,
-  +createdGroup: boolean
+  +createdGroup: boolean,
+  +deletedGroup: boolean
 }
 
 type Action = {
   +type: string,
-  +data: Object
+  +data: Object,
+  +groupId: string
 }
 
 export default function groupsReducer(state: State = initialState, action: Action): State {
@@ -37,7 +42,8 @@ export default function groupsReducer(state: State = initialState, action: Actio
         },
         error: false,
         errorMessage: '',
-        createdGroup: false
+        createdGroup: false,
+        deletedGroup: false
       };
     case types.GET_GROUPS_LIST_FAILURE:
       return {
@@ -68,6 +74,37 @@ export default function groupsReducer(state: State = initialState, action: Actio
         error: true,
         errorMessage: data.message
       };
+    case types.GET_USERS_BY_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupUsers: {
+          ...state.groupUsers,
+          [action.groupId]: data
+        }
+      };
+    case types.ADD_GROUP_TO_USR_SUCCESS:
+    case types.REMOVE_GROUP_FROM_USER_SUCCESS:
+      return {
+        ...state,
+        groupUsers: {
+          ...state.groupUsers,
+          [action.groupId]: null
+        }
+      };
+    // case types.DELETE_USER_SUCCESS:
+    // case types.UPDATE_USER_SUCCESS:
+    case types.CLEAR_USERS_DATA:
+      return {
+        ...state,
+        groupUsers: {}
+      };
+    case types.GET_USERS_BY_GROUP_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
+
     case types.CREATE_GROUP_SUCCESS:
       return {
         ...state,
@@ -83,7 +120,8 @@ export default function groupsReducer(state: State = initialState, action: Actio
       return {
         ...state,
         data: {},
-        currentUser: null
+        currentGroup: null,
+        groupUsers: {}
       };
     case types.CLEAR_CURRENT_GROUP:
       return {
@@ -102,6 +140,17 @@ export default function groupsReducer(state: State = initialState, action: Actio
         currentGroup: null
       };
     case types.UPDATE_GROUP_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: data.message
+      };
+    case types.DELETE_GROUP_SUCCESS:
+      return {
+        ...state,
+        deletedGroup: true
+      };
+    case types.DELETE_GROUP_FAILURE:
       return {
         ...state,
         error: true,

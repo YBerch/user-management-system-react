@@ -31,7 +31,6 @@ const Info = ({currentGroup, ...props}: Props): React.Element<any> => {
   const onEditButton = e => {
     e.preventDefault();
     setEditState(!editState);
-    console.log(updateData)
   };
 
   const onSave = e => {

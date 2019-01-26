@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateUser, getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
+import { getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
 import GroupItem from './GroupItem';
 import AddGroupsToUser from '../../../components/ModalsTriggers/AddGroupsToUser';
 import { uniqueKey } from '../../../helpers';
@@ -13,7 +13,6 @@ import {useState} from "react";
 type Props = {
   currentUser: Object,
   usersGroups: Object,
-  updateUser: Function,
   getGroupsByUser: Function,
   removeGroupFromUser: Function
 };
@@ -28,7 +27,7 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
     if(!props.usersGroups[currentUser._id]) {
       props.getGroupsByUser({id: currentUser._id, groups: {groups: currentUser.groups}});
     }
-  }, [currentUser]);
+  }, [currentUser, props.usersGroups]);
 
   const removeGroupFromUser = (e, groupId) => {
     e.preventDefault();
@@ -69,7 +68,6 @@ const mapStateToProps = ({users}) => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateUser,
   getGroupsByUser,
   removeGroupFromUser
 }, dispatch);

@@ -3,12 +3,23 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getGroup, clearCurrentUser, deleteUser, showModal, clearUsersError } from '../../actions/actionCreators';
+import { getGroup, deleteGroup, showModal, clearGroupsError } from '../../actions/actionCreators';
 import Info from './Info';
-import UserGroups from './UserGroups';
+import GroupUsers from './GroupUsers';
+import * as types from "../../actions/actionTypes";
 
 type Props = {
-  currentGroup: Object
+  currentGroup: Object,
+  getGroup: Function,
+  deleteGroup: Function,
+  deletedGroup: boolean,
+  clearGroupsError: Function,
+  showModal: Function,
+  match: Object,
+  history: Object,
+  error: boolean,
+  errorMessage: string
+
 }
 
 const Group = (props: Props): React.Element<any> => {
@@ -16,16 +27,22 @@ const Group = (props: Props): React.Element<any> => {
   const [currentGroup, setCurrentGroup]: [Object, Function] = useState({});
 
   useEffect(() => {
-    // setCurrentGroup(props.currentGroup)
 
-    /** fetch single user or put current user to the state **/
-    if(!props.currentGroup) {
+    /** fetch single group or put current group to the state **/
+    if(!props.currentGroup || props.currentGroup._id !== props.match.params.id) {
       props.getGroup(props.match.params.id);
     } else {
       setCurrentGroup(props.currentGroup)
     }
   },[props.currentGroup]);
 
+  useEffect(() => {
+    props.deletedGroup && props.history.push('/groups');
+    if(props.error){
+      props.clearGroupsError();
+      props.showModal(types.MODAL_TYPE_ERROR, {message: props.errorMessage});
+    }
+  }, [props.deletedGroup, props.error]);
 
   const showContent = () => {
     if(Object.keys(currentGroup).length) {
@@ -38,15 +55,20 @@ const Group = (props: Props): React.Element<any> => {
             </div>
             <div className='column right'>
               <div className='user-title'>Users:</div>
-              <UserGroups currentGroup={currentGroup}/>
+              <GroupUsers currentGroup={currentGroup}/>
             </div>
           </div>
-          <div className={`delete-button `}>
-            Delete user
+          <div onClick={onDeleteGroup} className={`delete-button `}>
+            Delete Group
           </div>
         </div>
       )
     }
+  };
+
+  const onDeleteGroup = e => {
+    e.preventDefault();
+    props.deleteGroup(currentGroup._id)
   };
 
   return(
@@ -56,12 +78,18 @@ const Group = (props: Props): React.Element<any> => {
   )
 };
 
-const mapStateToProps = ({groups}) => ({
-  currentGroup: groups.currentGroup
+const mapStateToProps = ({ groups }) => ({
+  currentGroup: groups.currentGroup,
+  deletedGroup: groups.deletedGroup,
+  error: groups.error,
+  errorMessage: groups.errorMessage
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getGroup
+  getGroup,
+  deleteGroup,
+  clearGroupsError,
+  showModal
 }, dispatch);
 
 export default connect(

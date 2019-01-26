@@ -2,7 +2,7 @@
 import * as types from '../../actions/actionTypes';
 
 const initialState = {
-  results: {},
+  results: null,
   error: false,
   errorMessage: ''
 };
@@ -33,6 +33,8 @@ export default function usersReducer(state: State = initialState, action: Action
         error: true,
         errorMessage: data.message
       };
+    case types.CLEAR_SEARCH_RESULTS:
+      return initialState;
     default:
       return state
   }

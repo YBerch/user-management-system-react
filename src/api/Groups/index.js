@@ -64,3 +64,16 @@ export const patchUpdateGroup = (data: Object) => {
   return request(requestOptions, path);
 };
 
+/** delete group
+ * @param data(string) - group id **/
+export const deleteGroup = (data: string) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+  };
+
+  const path = `groups/${data}`;
+
+  return request(requestOptions, path);
+};

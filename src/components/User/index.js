@@ -3,18 +3,17 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUser, clearCurrentUser, deleteUser, showModal, clearUsersError } from '../../actions/actionCreators';
+import { getUser, deleteUser, showModal, clearUsersError } from '../../actions/actionCreators';
 import Info from './Info';
 import UserGroups from './UserGroups';
+import * as types from '../../actions/actionTypes';
 import './style.css';
-import * as types from "../../actions/actionTypes";
 
 type Props = {
   usersList: Array<Object>,
   currentUser: Object,
   match: Object,
   getUser: Function,
-  clearCurrentUser: Function,
   deleteUser: Function,
   showModal: Function,
   clearUsersError: Function,
@@ -31,15 +30,12 @@ const User = (props: Props): React.Element<any> => {
   useEffect(() => {
 
     /** fetch single user or put current user to the state **/
-    if(!props.currentUser) {
+    if(!props.currentUser || props.currentUser._id !== props.match.params.id) {
       props.getUser(props.match.params.id);
     } else {
       setCurrentUser(props.currentUser)
     }
-
-    /** remove current user from the redux store when component will unmount **/
-    return () => props.currentUser && props.clearCurrentUser();
-  }, [props.currentUser]);
+  }, [props.currentUser, props.match.params]);
 
   useEffect(() => {
     props.deletedUser && props.history.push('/users');
@@ -64,7 +60,7 @@ const User = (props: Props): React.Element<any> => {
               <UserGroups currentUser={currentUser}/>
             </div>
           </div>
-          <div onClick={onDeleteUser} className={`delete-button ${currentUser.groups.length ? 'disabled' : ''}`}>
+          <div onClick={onDeleteUser} className={`delete-button`}>
             Delete user
           </div>
         </div>
@@ -96,7 +92,6 @@ const mapStateToProps = ({ users }) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getUser,
-  clearCurrentUser,
   deleteUser,
   showModal,
   clearUsersError

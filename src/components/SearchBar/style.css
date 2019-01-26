@@ -1,4 +1,5 @@
 .search-bar-container {
+    position: relative;
     border: 1px solid #e4e4e4;
     border-radius: 20px;
     float: left;
