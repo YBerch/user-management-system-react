@@ -1,4 +1,5 @@
 .pagination {
+    padding-top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -12,9 +13,10 @@
 
 .pagination a:hover {
     cursor: pointer;
+    background-color: #f2f2f2;
 }
 
 .pagination a.active {
-    background-color: #a8a8a8;
+    background-color: #cecece;
     color: white;
 }
