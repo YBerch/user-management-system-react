@@ -91,12 +91,10 @@ export default function groupsReducer(state: State = initialState, action: Actio
           [action.groupId]: null
         }
       };
-    // case types.DELETE_USER_SUCCESS:
-    // case types.UPDATE_USER_SUCCESS:
     case types.CLEAR_USERS_DATA:
       return {
         ...state,
-        groupUsers: {}
+        groupUsers: {},
       };
     case types.GET_USERS_BY_GROUP_FAILURE:
       return {

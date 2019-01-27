@@ -20,10 +20,12 @@ type Props = {
 const Users = (props: Props): React.Element<any> => {
 
   const [usersList, setUsersList]: [Array<Object>, Function] = useState([]);
+  const [page, setCurrentPage] = useState(1);
   const size = 20;
 
   const setPage = page => {
     props.setCurrentPageUsers(+page);
+    setCurrentPage(+page)
   };
 
   /** execute when component did update **/
@@ -47,21 +49,22 @@ const Users = (props: Props): React.Element<any> => {
   const showTable = () => {
     return (
       <div className='users-table-container'>
-        <table className='users-table' border="true">
+        <table className='users-table'>
           <thead>
           <tr>
-            <td>id</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Phone</td>
-            <td>Address</td>
-            <td>Birth date</td>
-            <td>Permission</td>
+            <th>№</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Birth date</th>
+            <th>Permission</th>
           </tr>
           </thead>
           <tbody>
           {
-            usersList.map((item, index): React.Element<any> => <UserItem key={uniqueKey()} item={item} index={index}/>)
+            usersList.map((item, index): React.Element<any> =>
+              <UserItem key={uniqueKey()} item={item} index={index} page={page} size={size}/>)
           }
           </tbody>
         </table>

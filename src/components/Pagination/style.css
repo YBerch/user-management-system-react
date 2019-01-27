@@ -3,16 +3,18 @@
     justify-content: center;
 }
 
-.pagination-page-item {
-    border: 1px solid black;
-    padding: 10px;
+.pagination a {
+    padding: 8px;
     margin-right: 5px;
+    color: gray;
+    border-radius: 4px;
 }
 
-.pagination-page-item:hover {
+.pagination a:hover {
     cursor: pointer;
 }
 
-.pagination-page-item.active {
-    background-color: #bbbf90;
+.pagination a.active {
+    background-color: #a8a8a8;
+    color: white;
 }

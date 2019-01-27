@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUser, deleteUser, showModal, clearUsersError } from '../../actions/actionCreators';
-import Info from './Info';
-import UserGroups from './UserGroups';
+import Info from './Info/index';
+import UserGroups from './UserGroups/index';
 import * as types from '../../actions/actionTypes';
 import './style.css';
 
@@ -35,7 +35,7 @@ const User = (props: Props): React.Element<any> => {
     } else {
       setCurrentUser(props.currentUser)
     }
-  }, [props.currentUser, props.match.params]);
+  }, [props.currentUser, props.match.params.id]);
 
   useEffect(() => {
     props.deletedUser && props.history.push('/users');

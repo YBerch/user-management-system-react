@@ -136,12 +136,13 @@ export default function usersReducer(state: State = initialState, action: Action
         ...state,
         data: {},
         currentUser: null,
-      };
-    case types.CLEAR_GROUPS_DATA:
-      return {
-        ...state,
         usersGroups: {}
       };
+    // case types.CLEAR_GROUPS_DATA:
+    //   return {
+    //     ...state,
+    //     usersGroups: {}
+    //   };
     case types.CLEAR_CURRENT_USER:
       return {
         ...state,

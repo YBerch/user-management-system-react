@@ -10,7 +10,31 @@
 
 .users-table {
     width: 100%;
-    border: 1px solid #686868;
     font-family: 'PT Sans Caption';
+    color: #3b3b3b;
     font-size: 15px;
+    border-collapse: collapse;
+}
+
+.users-table th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.users-table th:first-child {
+    width: 50px;
+}
+
+.users-table tr:nth-child(even){
+    background-color: #f8f8f8
+}
+
+.users-table tr:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+
+.users-table th {
+    background-color: #4CAF50;
+    color: white;
 }

@@ -38,6 +38,12 @@ export default function sessionReducer(state: State = initialState, action: Acti
         error: true,
         errorMessage: action.data.message
       };
+    case types.CLEAR_SESSION_ERROR:
+      return {
+        ...state,
+        error: false,
+        errorMessage: ''
+      };
     default:
       return state
   }

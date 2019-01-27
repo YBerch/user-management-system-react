@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUsersByGroup, removeGroupFromUser } from '../../../actions/actionCreators';
-import UserItem from './UserItem';
-import { uniqueKey } from '../../../helpers';
+import UserItem from './UserItem/index';
+import { uniqueKey } from '../../../helpers/index';
 import './style.css';
 
 type Props = {
@@ -25,7 +25,7 @@ const GroupUsers = ({currentGroup, ...props}: Props): React.Element<any> => {
     if(!props.groupUsers[currentGroup._id]) {
       props.getUsersByGroup({groupId: currentGroup._id});
     }
-  }, [currentGroup, props.groupUsers]);
+  }, [props.groupUsers]);
 
   const removeGroupFromUser = (e, userId) => {
     e.preventDefault();

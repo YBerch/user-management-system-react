@@ -32,6 +32,7 @@ export const deleteGroup = (data: string) => ({type: types.DELETE_GROUP_REQUEST,
 /********** SESSION **********/
 export const login = (data: Object) => ({type: types.LOGIN_REQUEST, data});
 export const logout = () => ({type: types.LOGOUT_REQUEST});
+export const clearSessionError = () => ({type: types.CLEAR_SESSION_ERROR});
 
 /********** MODAL **********/
 export const showModal = (type: string, props: Object) => ({type: types.SHOW_MODAL, payload: {type, props}});

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { history } from '../../../../store';
 import { setCurrentUser } from '../../../../actions/actionCreators';
-import { getRandomColor } from '../../../../helpers';
+import { getRandomColor } from '../../../../helpers/index';
 import './style.css';
 
 type Props = {

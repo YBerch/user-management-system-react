@@ -1,0 +1,31 @@
+.modal-content.warning-content {
+    width: 500px;
+    height: 300px;
+}
+
+.modal-body.warning {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.modal-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-button-warning {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    padding: 10px;
+    color: gray;
+    background-color: #dedede;
+    bottom: 25px;
+}
+
+.modal-button-warning:hover {
+    cursor: pointer;
+    opacity: .8;
+}

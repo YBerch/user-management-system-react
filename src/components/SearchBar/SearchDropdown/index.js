@@ -6,7 +6,8 @@ import './style.css';
 
 type Props = {
   results: Object,
-  setQuery: Function
+  setQuery: Function,
+  dropdownRef: Object
 }
 
 const SearchDropdown = ({results, setQuery, dropdownRef}: Props): React.Element<any> => {

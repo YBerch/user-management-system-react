@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getGroup, deleteGroup, showModal, clearGroupsError } from '../../actions/actionCreators';
-import Info from './Info';
-import GroupUsers from './GroupUsers';
+import Info from './Info/index';
+import GroupUsers from './GroupUsers/index';
 import * as types from "../../actions/actionTypes";
 
 type Props = {
@@ -34,7 +34,7 @@ const Group = (props: Props): React.Element<any> => {
     } else {
       setCurrentGroup(props.currentGroup)
     }
-  },[props.currentGroup]);
+  },[props.currentGroup, props.match.params.id]);
 
   useEffect(() => {
     props.deletedGroup && props.history.push('/groups');
