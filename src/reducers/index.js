@@ -6,6 +6,7 @@ import users from './Users';
 import groups from './Groups';
 import modal from './Modal';
 import search from './Search';
+import fetching from './Fetching';
 
 const appReducer = history => combineReducers({
   session,
@@ -13,6 +14,7 @@ const appReducer = history => combineReducers({
   groups,
   modal,
   search,
+  fetching,
   router: connectRouter(history)
 });
 

@@ -102,3 +102,7 @@ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
 
 export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
+
+/********** SEARCH **********/
+export const FETCH_REQUEST = 'FETCH_REQUEST';
+export const FETCH_RECEIVE = 'FETCH_RECEIVE';

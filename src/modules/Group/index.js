@@ -7,6 +7,7 @@ import { getGroup, deleteGroup, showModal, clearGroupsError } from '../../action
 import Info from './Info/index';
 import GroupUsers from './GroupUsers/index';
 import * as types from "../../actions/actionTypes";
+import './style.css';
 
 type Props = {
   currentGroup: Object,
@@ -19,7 +20,6 @@ type Props = {
   history: Object,
   error: boolean,
   errorMessage: string
-
 }
 
 const Group = (props: Props): React.Element<any> => {
@@ -56,10 +56,10 @@ const Group = (props: Props): React.Element<any> => {
             <div className='column right'>
               <div className='user-title'>Users:</div>
               <GroupUsers currentGroup={currentGroup}/>
+              <div onClick={onDeleteGroup} className={`delete-button`}>
+                Delete Group
+              </div>
             </div>
-          </div>
-          <div onClick={onDeleteGroup} className={`delete-button `}>
-            Delete Group
           </div>
         </div>
       )

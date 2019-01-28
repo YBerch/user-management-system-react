@@ -12,6 +12,7 @@ import {
 import { getGroupsList } from '../../api/Groups';
 
 function* getUsersListGen(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getUsersList, action.data);
 
   const { data } = response;
@@ -21,9 +22,11 @@ function* getUsersListGen(action){
   } else {
     yield put({type: types.GET_USERS_LIST_FAILURE, data});
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 function* getUserGen(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getUser, action.data);
 
   const { data } = response;
@@ -33,9 +36,11 @@ function* getUserGen(action){
   } else {
     yield put({type: types.GET_USER_FAILURE, data});
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 function* getGroupsByUser(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getGroupsList, action.data.groups);
   const { data } = response;
 
@@ -44,6 +49,7 @@ function* getGroupsByUser(action){
   } else {
     yield put({type: types.GET_GROUPS_BY_USER_FAILURE, data});
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 function* createUser(action){

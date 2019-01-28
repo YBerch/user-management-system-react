@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import { authRoutes, nonAuthRoutes } from './routes';
+import LoadingSpinner from './modules/Modals/LoadingSpinnerModal';
 import './App.css';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         <ConnectedRouter history={this.props.history}>
           {routes}
         </ConnectedRouter>
+        <LoadingSpinner/>
       </div>
     );
   }

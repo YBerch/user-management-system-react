@@ -58,10 +58,10 @@ const User = (props: Props): React.Element<any> => {
             <div className='column right'>
               <div className='user-title'>User Groups:</div>
               <UserGroups currentUser={currentUser}/>
+              <div onClick={onDeleteUser} className={`delete-button`}>
+                Delete user
+              </div>
             </div>
-          </div>
-          <div onClick={onDeleteUser} className={`delete-button`}>
-            Delete user
           </div>
         </div>
       )

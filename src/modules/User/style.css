@@ -1,5 +1,5 @@
 .delete-button {
-    position: fixed;
+    position: absolute;
     right: 0;
     background-color: whitesmoke;
     width: 250px;
@@ -38,7 +38,9 @@
 }
 
 .column.right {
+    position: relative;
     width: 60%;
+    height: 800px;
     min-width: 700px;
 }
 

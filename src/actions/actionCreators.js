@@ -41,4 +41,3 @@ export const hideModal = () => ({type: types.HIDE_MODAL});
 /********** SEARCH **********/
 export const search = (data: string) => ({type: types.SEARCH_REQUEST, data});
 export const clearSearchResults = () => ({type: types.CLEAR_SEARCH_RESULTS});
-

@@ -4,6 +4,7 @@ import { getGroupsList, getGroup, postCreateGroup, patchUpdateGroup, deleteGroup
 import { getUsersList } from '../../api/Users';
 
 function* getGroupsListGen(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getGroupsList, action.data);
 
   const { data } = response;
@@ -13,9 +14,11 @@ function* getGroupsListGen(action){
   } else {
     yield put({type: types.GET_GROUPS_LIST_FAILURE, data})
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 function* getGroupGen(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getGroup, action.data);
 
   const { data } = response;
@@ -25,9 +28,11 @@ function* getGroupGen(action){
   } else {
     yield put({type: types.GET_GROUP_FAILURE, data});
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 function* getUsersByGroup(action){
+  yield put({type: types.FETCH_REQUEST});
   const response = yield call(getUsersList, action.data);
   const { data } = response;
 
@@ -36,6 +41,7 @@ function* getUsersByGroup(action){
   } else {
     yield put({type: types.GET_USERS_BY_GROUP_FAILURE, data});
   }
+  yield put({type: types.FETCH_RECEIVE});
 }
 
 

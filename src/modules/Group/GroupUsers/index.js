@@ -12,7 +12,8 @@ type Props = {
   currentGroup: Object,
   groupUsers: Object,
   getUsersByGroup: Function,
-  removeGroupFromUser: Function
+  removeGroupFromUser: Function,
+  isFetching: boolean
 };
 
 const GroupUsers = ({currentGroup, ...props}: Props): React.Element<any> => {
@@ -46,7 +47,7 @@ const GroupUsers = ({currentGroup, ...props}: Props): React.Element<any> => {
           </ul>
         </div>
       )
-    } else {
+    } else if(!props.isFetching){
       return (
         <div className='empty-list'>User list empty</div>
       )
@@ -60,8 +61,9 @@ const GroupUsers = ({currentGroup, ...props}: Props): React.Element<any> => {
   )
 };
 
-const mapStateToProps = ({ groups }) => ({
-  groupUsers: groups.groupUsers
+const mapStateToProps = ({ groups, fetching }) => ({
+  groupUsers: groups.groupUsers,
+  isFetching: fetching.isFetching
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
