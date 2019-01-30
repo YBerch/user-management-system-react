@@ -63,11 +63,12 @@ const CreateGroupModal = (props: Props): React.Element<any> => {
         <div className="modal-body">
           <form onChange={onChange} className='modal-create-user-form'>
             <input name='name' placeholder='name'/>
-            <button onClick={onSubmit}>Create</button>
+            <div className='modal-button-container'>
+              <div
+                className={`modal-button-save ${Object.values(credentials).some(item => !item) ? 'disabled' : ''}`}
+                onClick={onSubmit}>Create</div>
+            </div>
           </form>
-        </div>
-        <div className="modal-footer">
-          <div className='modal-footer-title'>Modal Footer</div>
         </div>
       </div>
 

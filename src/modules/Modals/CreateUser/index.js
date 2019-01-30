@@ -25,12 +25,14 @@ const CreateUserModal = (props: Props): React.Element<any> => {
     lastName: '',
     email: '',
     phone: '',
-    permission: '',
+    permission: 'user',
     groups: [],
     password: ''
   };
 
   const [credentials, setCredentials]: [Object, Function] = useState(initialCredentials);
+  const [emailValid, setEmailValid]: [boolean, Function] = useState(true);
+  const [phoneValid, setPhoneValid]: [boolean, Function] = useState(true);
 
   if(props.createdUser){
     props.showModal(types.MODAL_TYPE_SUCCESS, {message: 'User successful created!'})
@@ -48,19 +50,33 @@ const CreateUserModal = (props: Props): React.Element<any> => {
     props.hideModal()
   };
 
+  const emailValidation = (value: string) => {
+    return !!value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm);
+  };
+
+  const phoneValidation = (value: string) => {
+    return !!value.match(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g) && value.length > 12;
+  };
+
+  const commonValidation = () => (
+    Object.values(credentials).some(item => !item) && emailValid && phoneValid
+  );
+
   const onChange = e => {
     e.preventDefault();
-    if(e.target.name === 'groups'){
-      setCredentials({
-        ...credentials,
-        groups: e.target.value.split(',')
-      })
-    } else {
-      setCredentials({
-        ...credentials,
-        [e.target.name]: e.target.value
-      })
+
+    switch (e.target.name){
+      case 'email':
+        setEmailValid(emailValidation(e.target.value));
+        break;
+      case 'phone':
+        setPhoneValid(phoneValidation(e.target.value));
+        break;
     }
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value
+    })
   };
 
   const onSubmit = e => {
@@ -77,18 +93,22 @@ const CreateUserModal = (props: Props): React.Element<any> => {
         </div>
         <div className="modal-body">
           <form onChange={onChange} className='modal-create-user-form'>
-            <input name='firstName' placeholder='first name' defaultValue='test'/>
-            <input name='lastName' placeholder='last name' defaultValue='test'/>
-            <input name='email' placeholder='email'/>
-            <input name='phone' placeholder='phone'/>
-            <input name='permission' placeholder='permission' defaultValue='user'/>
-            <input name='groups' placeholder='groups' defaultValue='5c35e70976f6e5d76be76f8b,5c35e70976f6e5d76be76f8e,5c35e70976f6e5d76be76f8d,5c35e70976f6e5d76be76f8c'/>
-            <input name='password' placeholder='password' defaultValue='test'/>
-            <button onClick={onSubmit}>Create</button>
+            <input name='firstName' placeholder='first name'/>
+            <input name='lastName' placeholder='last name'/>
+            <input className={`${!emailValid ? 'validation-warning' : ''}`} name='email' placeholder='email'/>
+            <input className={`${!phoneValid ? 'validation-warning' : ''}`} name='phone' placeholder='phone'/>
+            <select className='permission-select' name='permission'>
+              <option value='user'>user</option>
+              <option value='moderator'>moderator</option>
+              <option value='administrator'>administrator</option>
+            </select>
+            <input type='password' name='password' placeholder='password'/>
+            <div className='modal-button-container'>
+              <div
+                className={`modal-button-save ${commonValidation() ? 'disabled' : ''}`}
+                onClick={onSubmit}>Create</div>
+            </div>
           </form>
-        </div>
-        <div className="modal-footer">
-          <div className='modal-footer-title'>Modal Footer</div>
         </div>
       </div>
     </div>

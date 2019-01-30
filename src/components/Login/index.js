@@ -26,7 +26,7 @@ const Login = (props: Props): React.Element<any> => {
   useEffect(() => {
     const permission = props.permission === 'administrator' || props.permission === 'moderator';
     if(props.authorize && permission){
-      props.history.push('/users')
+      props.history.push('/users');
     }
   }, [props.authorize]);
 

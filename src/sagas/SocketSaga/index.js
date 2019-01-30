@@ -29,10 +29,6 @@ const createSocketChannel = socket => {
 
     socket.on('ping', pingHandler);
 
-    // socket.on('connect_error', () => {
-    //   pingHandler({payload: 'disconnect'})
-    // });
-
     socket.on('disconnect', () => pingHandler({payload: 'disconnect'}));
 
     const unsubscribe = () => {

@@ -1,36 +1,38 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true,
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "modules": true,
-      "jsx": true
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
     },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react"
-  ],
-  "rules": {
-    "indent": [
-      "error",
-      "tab"
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "flowtype"
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single",
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
-  }
+    "parser": "babel-eslint",
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
 };
