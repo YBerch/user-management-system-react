@@ -1,10 +1,17 @@
 // @flow
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { useState, useEffect } from 'react';
+import { logout } from '../../actions/actionCreators';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-const SideBar = (): React.Element<any> => {
+type Props = {
+  logout: Function
+}
+
+const SideBar = (props: Props): React.Element<any> => {
 
   const [sideBarVisibility, setSideBarVisibility]: [boolean, Function] = useState(false);
 
@@ -23,6 +30,11 @@ const SideBar = (): React.Element<any> => {
     setSideBarVisibility(!sideBarVisibility)
   };
 
+  const logout = e => {
+    e.preventDefault();
+    props.logout();
+  };
+
   return(
     <div>
       <div style={{width: sideBarVisibility ? '250px' : '100px'}} className='sidebar'>
@@ -39,7 +51,10 @@ const SideBar = (): React.Element<any> => {
                Groups
             </span>
         </Link>
-        {/*<a href="#home"><i className="fa fa-fw fa-home"></i> Home</a>*/}
+        <a href="#home" onClick={logout} className='logout-button'>
+          <i className="fa fa-fw fa-sign-out"></i>
+          <span className='sidebar-item-title'>Logout</span>
+        </a>
         {/*<a href="#services"><i className="fa fa-fw fa-wrench"></i> Services</a>*/}
         {/*<a href="#clients"><i className="fa fa-fw fa-user"></i> Clients</a>*/}
         {/*<a href="#contact"><i className="fa fa-fw fa-envelope"></i> Contact</a>*/}
@@ -48,4 +63,11 @@ const SideBar = (): React.Element<any> => {
   )
 };
 
-export default SideBar;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logout
+}, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SideBar);

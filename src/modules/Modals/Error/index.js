@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showModal, hideModal } from "../../../actions/actionCreators";
 import * as types from '../../../actions/actionTypes';
+import './style.css';
 
 type Props = {
   showModal: Function,
@@ -35,17 +36,16 @@ const Error = (props: Props): React.Element<any> => {
 
   return(
     <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
+      <div className="modal-content warning-content">
+        <div className="modal-header warning-header">
           <span className="close" onClick={hideModal}>&times;</span>
-          <div className='modal-header-title'>Error</div>
+          <div className='modal-header-title'>Warning</div>
         </div>
-        <div className="modal-body">
+        <div className="modal-body warning">
           <h1>{props.message}</h1>
         </div>
-        <button onClick={redirectTo}>Ok</button>
-        <div className="modal-footer">
-          <div className='modal-footer-title'>Modal Footer</div>
+        <div className='modal-button-container'>
+          <div className='modal-button-warning' onClick={redirectTo}>OK</div>
         </div>
       </div>
 

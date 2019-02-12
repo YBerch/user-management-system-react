@@ -14,9 +14,9 @@ import {
 import GroupItem from './GroupItem';
 import Pagination from '../../../components/Pagination';
 import * as types from '../../../actions/actionTypes';
+import { uniqueKey } from "../../../helpers";
 import '../style.css';
 import './style.css'
-import {uniqueKey} from "../../../helpers";
 
 type Props = {
   showModal: Function,
@@ -44,7 +44,7 @@ const CreateUserModal = (props: Props): React.Element<any> => {
   };
 
   if(props.addedGroup){
-    props.showModal(types.MODAL_TYPE_SUCCESS, {message: 'Group successful added!'})
+    // props.showModal(types.MODAL_TYPE_SUCCESS, {message: 'Group successful added!'})
   }
 
   useEffect(() => {
@@ -94,7 +94,13 @@ const CreateUserModal = (props: Props): React.Element<any> => {
             <ul className="w3-ul w3-card-4">
               {
                 groupsList.map((item, index): React.Element<any> => (
-                    <GroupItem key={uniqueKey()} item={item} index={index} addGroup={addGroup}/>
+                    <GroupItem
+                      key={uniqueKey()}
+                      item={item}
+                      index={index}
+                      addGroup={addGroup}
+                      currentUser={props.currentUser}
+                    />
                   )
                 )
               }

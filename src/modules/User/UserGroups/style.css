@@ -1,0 +1,19 @@
+.user-groups-container {
+    margin: 65px 20px 20px;
+}
+
+.user-groups-table {
+    width: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.empty-list {
+    display: flex;
+    justify-content: center;
+    padding-top: 200px;
+    margin-right: 0;
+    font-size: 25px;
+    font-weight: 600;
+    color: gray;
+}

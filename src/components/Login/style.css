@@ -1,0 +1,37 @@
+.login-form-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    left: calc(50% - 110px);
+    top: 30%
+}
+
+.login-form input{
+    line-height: 25px;
+    margin-bottom: 40px;
+    border: none;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.login-form input:focus {
+    outline: none;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+    float: right;
+    margin-right: 80px;
+    color: #3b3b3b;
+    width: 70px;
+    height: 25px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    border: none;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    background-color: #e7e7e7;
+}

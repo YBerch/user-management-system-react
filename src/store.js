@@ -35,7 +35,7 @@ const composedEnhancers = compose(
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['modal']
+  blacklist: ['modal', 'search']
 };
 
 export const store = createStore(

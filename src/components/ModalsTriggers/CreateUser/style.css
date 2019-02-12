@@ -1,0 +1,17 @@
+.user-create-button {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    line-height: 30px;
+    background-color: #097999;
+    color: white;
+    border-radius: 8px;
+}
+
+.user-create-button:hover {
+    cursor: pointer;
+}
+
+.plus-icon {
+    margin: 8px 10px 0 0;
+}

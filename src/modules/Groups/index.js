@@ -20,10 +20,12 @@ type Props = {
 const Groups = (props: Props): React.Element<any> => {
 
   const [groupsList, setGroupsList]: [Array<Object>, Function] = useState([]);
+  const [page, setCurrentPage] = useState(1);
   const size = 20;
 
   const setPage = page => {
     props.setCurrentPageGroups(+page);
+    setCurrentPage(+page)
   };
 
   /** execute when component did update **/
@@ -47,17 +49,18 @@ const Groups = (props: Props): React.Element<any> => {
   const showTable = () => {
     return (
       <div className='groups-table-container'>
-        <table className='groups-table' border="true">
+        <table className='groups-table'>
           <thead>
           <tr>
-            <td>#</td>
-            <td>Name</td>
-            <td>Created</td>
+            <th>№</th>
+            <th>Name</th>
+            <th>Created</th>
           </tr>
           </thead>
           <tbody>
           {
-            groupsList.map((item, index): React.Element<any> => <GroupItem key={uniqueKey()} item={item} index={index}/>)
+            groupsList.map((item, index): React.Element<any> =>
+              <GroupItem key={uniqueKey()} item={item} index={index} page={page} size={size}/>)
           }
           </tbody>
         </table>

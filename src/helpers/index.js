@@ -5,7 +5,6 @@ export const getToken = state => state.session.token;
 export function debounce(func, wait) {
   let timeout;
   return function(...args) {
-    console.log(args)
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   }

@@ -8,10 +8,12 @@ import { setCurrentUser } from '../../../actions/actionCreators';
 type Props = {
   item: Object,
   index: number,
+  page: number,
+  size: number,
   setCurrentUser: Function
 }
 
-const UserItem = ({ item, index, ...props }: Props): React.Element<'tr'> => {
+const UserItem = ({ item, index, page, size, ...props }: Props): React.Element<'tr'> => {
 
   const userSelect = e => {
     e.preventDefault();
@@ -20,10 +22,10 @@ const UserItem = ({ item, index, ...props }: Props): React.Element<'tr'> => {
   };
 
   return (
-    <tr>
-      <td>{index+1}</td>
+    <tr onClick={userSelect}>
+      <td>{page * size - size + index+1}</td>
       <td>
-        <div onClick={userSelect}>{item.firstName} {item.lastName}</div>
+        <div>{item.firstName} {item.lastName}</div>
       </td>
       <td>{item.email}</td>
       <td>{item.phone}</td>

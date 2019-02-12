@@ -1,37 +1,22 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { logout } from '../../actions/actionCreators';
 import SearchBar from '../../components/SearchBar';
+import logo from '../../logo.svg';
 import './style.css';
 
-type Props = {
-  logout: Function
-}
-
-const Header = (props: Props): React.Element<any> => {
-
-  const logout = () => {
-    props.logout()
-  };
+const Header = (): React.Element<any> => {
 
   return (
     <div className="header">
-      <a href='/' className="logo">User Managemant System</a>
+      <div className="logo">
+        <img src={logo} className="project-logo" alt="logo" />
+        <span>User Managemant System</span>
+      </div>
       <div className="header-right">
         <SearchBar />
-        <a className="active" onClick={logout}>Logout</a>
       </div>
     </div>
   )
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  logout
-}, dispatch);
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Header);
+export default Header;

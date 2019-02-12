@@ -3,19 +3,19 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateUser, getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
-import GroupItem from './GroupItem';
-import AddGroupsToUser from '../../../components/ModalsTriggers/AddGroupsToUser';
-import { uniqueKey } from '../../../helpers';
+import { getGroupsByUser, removeGroupFromUser } from '../../../actions/actionCreators';
+import GroupItem from './GroupItem/index';
+import AddGroupsToUser from '../../../components/ModalsTriggers/AddGroupsToUser/index';
+import { uniqueKey } from '../../../helpers/index';
 import './style.css';
-import {useState} from "react";
+import { useState } from "react";
 
 type Props = {
   currentUser: Object,
   usersGroups: Object,
-  updateUser: Function,
   getGroupsByUser: Function,
-  removeGroupFromUser: Function
+  removeGroupFromUser: Function,
+  isFetching: boolean
 };
 
 const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
@@ -25,7 +25,7 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
   useEffect(() => {
     setUser(currentUser);
 
-    if(!props.usersGroups[currentUser._id]) {
+    if (!props.usersGroups[currentUser._id]) {
       props.getGroupsByUser({id: currentUser._id, groups: {groups: currentUser.groups}});
     }
   }, [currentUser]);
@@ -36,10 +36,9 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
   };
 
   const showTable = () => {
-    if(props.usersGroups[user._id] && props.usersGroups[user._id].length){
+    if (props.usersGroups[user._id] && props.usersGroups[user._id].length) {
       return (
-        <div>
-          <AddGroupsToUser />
+        <div className="user-groups-table">
           <ul className="w3-ul w3-card-4">
             {
               props.usersGroups[user._id].map((item, index): React.Element<any> => (
@@ -50,7 +49,7 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
           </ul>
         </div>
       )
-    } else {
+    } else if(!props.isFetching){
       return (
         <div className='empty-list'>Groups list empty</div>
       )
@@ -59,17 +58,18 @@ const UserGroups = ({currentUser, ...props}: Props): React.Element<any> => {
 
   return (
     <div className='user-groups-container'>
-    {showTable()}
+      <AddGroupsToUser/>
+      {showTable()}
     </div>
   )
 };
 
-const mapStateToProps = ({users}) => ({
-  usersGroups: users.usersGroups
+const mapStateToProps = ({ users, fetching }) => ({
+  usersGroups: users.usersGroups,
+  isFetching: fetching.isFetching
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateUser,
   getGroupsByUser,
   removeGroupFromUser
 }, dispatch);

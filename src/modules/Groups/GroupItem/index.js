@@ -8,22 +8,24 @@ import { setCurrentGroup } from '../../../actions/actionCreators';
 type Props = {
   item: Object,
   index: number,
+  page: number,
+  size: number,
   setCurrentGroup: Function
 }
 
-const GroupItem = ({item, index, ...props}: Props): React.Element<any> => {
+const GroupItem = ({item, index, page, size, ...props}: Props): React.Element<any> => {
 
-  const userSelect = e => {
+  const groupSelect = e => {
     e.preventDefault();
     props.setCurrentGroup(item);
     history.push(`/groups/${item._id}`)
   };
 
   return (
-    <tr>
-      <td>{index+1}</td>
+    <tr onClick={groupSelect}>
+      <td>{page * size - size + index + 1}</td>
       <td>
-        <div onClick={userSelect}>{item.name}</div>
+        <div>{item.name}</div>
       </td>
       <td>{new Date(item.created).toISOString().substring(0, 10)}</td>
     </tr>

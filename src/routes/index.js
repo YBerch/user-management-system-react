@@ -6,10 +6,10 @@ import CrumbRoute from "../components/Breadcrumb";
 import RootModal from '../modules/Modals';
 import SideBar from '../components/SideBar';
 import Header from '../components/Header';
-import Login from '../modules/Login';
+import Login from '../components/Login';
 import Users from '../modules/Users';
-import User from '../components/User';
-import Group from '../components/Group';
+import User from '../modules/User';
+import Group from '../modules/Group';
 import Groups from '../modules/Groups';
 import NotFound from '../components/NotFound';
 import '../assets/main.css';
@@ -56,6 +56,7 @@ export const nonAuthRoutes = (
 
         <Route path='*' component={NotFound} />
       </Switch>
+      <RootModal />
     </main>
   </div>
 );

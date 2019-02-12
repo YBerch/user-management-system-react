@@ -1,10 +1,10 @@
-.w3-bar .close-button {
+.w3-bar .add-group-button {
     white-space: normal;
-    padding: 14px 14px;
+    padding: 20px 10px;
     color: gray;
 }
 
-.w3-bar .close-button:hover {
+.w3-bar .add-group-button:hover {
     cursor: pointer;
     color: #313131;
 }
@@ -31,4 +31,13 @@
 
 .w3-bar-item:hover {
     cursor: pointer;
+}
+
+.added-group {
+    opacity: .4;
+}
+
+.fa.fa-check.disabled-item {
+    pointer-events: none;
+    color: green;
 }

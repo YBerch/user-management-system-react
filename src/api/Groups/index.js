@@ -49,3 +49,31 @@ export const postCreateGroup = (data: Object) => {
 
   return request(requestOptions, path);
 };
+/** update group
+ * @param data(object) - group credentials object **/
+export const patchUpdateGroup = (data: Object) => {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+    body: JSON.stringify(data)
+  };
+
+  const path = `groups/${data._id}`;
+
+  return request(requestOptions, path);
+};
+
+/** delete group
+ * @param data(string) - group id **/
+export const deleteGroup = (data: string) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+  };
+
+  const path = `groups/${data}`;
+
+  return request(requestOptions, path);
+};
