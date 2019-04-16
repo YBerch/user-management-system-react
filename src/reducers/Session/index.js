@@ -21,12 +21,14 @@ type Action = {
 }
 
 export default function sessionReducer(state: State = initialState, action: Action): State {
+  const { data } = action;
+
   switch (action.type){
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         authorize: true,
-        user: action.data,
+        user: data,
         error: false,
         errorMessage: ''
       };
@@ -36,7 +38,7 @@ export default function sessionReducer(state: State = initialState, action: Acti
         authorize: false,
         user: {},
         error: true,
-        errorMessage: action.data.message
+        errorMessage: data.message
       };
     case types.CLEAR_SESSION_ERROR:
       return {

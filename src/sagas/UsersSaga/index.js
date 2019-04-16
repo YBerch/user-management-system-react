@@ -106,9 +106,9 @@ function* addGroupToUser(action) {
   const { data } = response;
 
   if(response.status === 200){
-    yield put({type: types.ADD_GROUP_TO_USR_SUCCESS, data, groupId: action.data.groupId});
+    yield put({type: types.ADD_GROUP_TO_USER_SUCCESS, data, groupId: action.data.groupId});
   } else {
-    yield put({type: types.ADD_GROUP_TO_USR_FAILURE, data});
+    yield put({type: types.ADD_GROUP_TO_USER_FAILURE, data});
   }
 }
 
@@ -120,7 +120,7 @@ function* usersSaga(){
   yield takeLatest(types.UPDATE_USER_REQUEST, updateUser);
   yield takeLatest(types.DELETE_USER_REQUEST, deleteUserGen);
   yield takeLatest(types.REMOVE_GROUP_FROM_USER_REQUEST, removeGroupFromUser);
-  yield takeLatest(types.ADD_GROUP_TO_USR_REQUEST, addGroupToUser)
+  yield takeLatest(types.ADD_GROUP_TO_USER_REQUEST, addGroupToUser)
 }
 
 export default usersSaga;

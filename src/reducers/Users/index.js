@@ -105,7 +105,7 @@ export default function usersReducer(state: State = initialState, action: Action
         error: true,
         errorMessage: data.message
       };
-    case types.ADD_GROUP_TO_USR_SUCCESS:
+    case types.ADD_GROUP_TO_USER_SUCCESS:
       return {
         ...state,
         addedGroup: true,
@@ -114,7 +114,7 @@ export default function usersReducer(state: State = initialState, action: Action
           [data.userId]: null
         }
       };
-    case types.ADD_GROUP_TO_USR_FAILURE:
+    case types.ADD_GROUP_TO_USER_FAILURE:
       return {
         ...state,
         error: true,
