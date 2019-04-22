@@ -3,7 +3,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentGroup } from '../../../../actions/actionCreators';
-import { getRandomColor } from '../../../../helpers';
 import './style.css';
 
 type Props = {
@@ -24,7 +23,7 @@ const GroupItem = ({item, index, ...props}: Props): React.Element<any> => {
         onClick={e => props.addGroup(e, item._id)}
       > </span>
       <div className={`group-item ${checkAddedGroup ? 'added-group' : ''}`}>
-        <div className='group-logo' style={{backgroundColor: getRandomColor()}}>{item.name[0].toUpperCase()}</div>
+        <div className='group-logo'>{item.name[0].toUpperCase()}</div>
         <div className="w3-bar-item">
           <span className="w3-large">{item.name}</span><br/>
           <span>Description</span>

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { history } from '../../../../store';
 import { setCurrentUser } from '../../../../actions/actionCreators';
-import { getRandomColor } from '../../../../helpers/index';
 import './style.css';
 
 type Props = {
@@ -25,7 +24,7 @@ const GroupItem = ({item, index, ...props}: Props): React.Element<any> => {
   return (
     <li className="w3-bar">
       <span onClick={(e) => props.removeGroupFromUser(e, item._id)} className="close-button w3-xlarge w3-right">&times;</span>
-      <div className='group-logo' style={{backgroundColor: getRandomColor()}}>{item.firstName[0].toUpperCase()}</div>
+      <div className='user-logo'>{item.firstName[0].toUpperCase()}</div>
       <div onClick={groupSelect} className="w3-bar-item">
         <span className="w3-large">{item.firstName} {item.lastName}</span><br/>
         <span>{item.permission}</span>
