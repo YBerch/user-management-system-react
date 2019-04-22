@@ -6,9 +6,9 @@ export const getUsersList = (data: Object) => ({type: types.GET_USERS_LIST_REQUE
 export const getUser = (data: string) => ({type: types.GET_USER_REQUEST, data});
 export const getGroupsByUser = (data: Object) => ({type: types.GET_GROUPS_BY_USER_REQUEST, data});
 export const removeGroupFromUser = (data: string) => ({type: types.REMOVE_GROUP_FROM_USER_REQUEST, data});
-export const addGroupToUser = (data: string) => ({type: types.ADD_GROUP_TO_USR_REQUEST, data});
+export const addGroupToUser = (data: string) => ({type: types.ADD_GROUP_TO_USER_REQUEST, data});
 export const createUser = (data: Object) => ({type: types.CREATE_USER_REQUEST, data});
-export const clearCurrentUser = () => ({type: types.CLEAR_CURRENT_USER});
+export const clearCurrentUser = () => ({type: types.CLEAR_CURRENT_USER}); // redundant
 export const clearUsersError = () => ({type: types.CLEAR_USERS_ERROR});
 export const clearUsersData = () => ({type: types.CLEAR_USERS_DATA});
 export const setCurrentPageUsers = (data: number) => ({type: types.SET_CURRENT_PAGE_USERS, data});
@@ -21,9 +21,9 @@ export const getGroupsList = (data: Object) => ({type: types.GET_GROUPS_LIST_REQ
 export const getGroup = (data: string) => ({type: types.GET_GROUP_REQUEST, data});
 export const getUsersByGroup = (data: Object) => ({type: types.GET_USERS_BY_GROUP_REQUEST, data});
 export const createGroup = (data: Object) => ({type: types.CREATE_GROUP_REQUEST, data});
-export const clearCurrentGroup = () => ({type: types.CLEAR_CURRENT_GROUP});
+export const clearCurrentGroup = () => ({type: types.CLEAR_CURRENT_GROUP}); // redundant
 export const clearGroupsError = () => ({type: types.CLEAR_GROUPS_ERROR});
-export const clearGroupsData = () => ({type: types.CLEAR_GROUPS_DATA});
+export const clearGroupsData = () => ({type: types.CLEAR_GROUPS_DATA}); // redundant
 export const setCurrentPageGroups = (data: number) => ({type: types.SET_CURRENT_PAGE_GROUPS, data});
 export const setCurrentGroup = (data: Object) => ({type: types.SET_CURRENT_GROUP, data});
 export const updateGroup = (data: Object) => ({type: types.UPDATE_GROUP_REQUEST, data});

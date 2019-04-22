@@ -82,7 +82,7 @@ export default function groupsReducer(state: State = initialState, action: Actio
           [action.groupId]: data
         }
       };
-    case types.ADD_GROUP_TO_USR_SUCCESS:
+    case types.ADD_GROUP_TO_USER_SUCCESS:
     case types.REMOVE_GROUP_FROM_USER_SUCCESS:
       return {
         ...state,
@@ -94,7 +94,7 @@ export default function groupsReducer(state: State = initialState, action: Actio
     case types.CLEAR_USERS_DATA:
       return {
         ...state,
-        groupUsers: {},
+        groupUsers: {}
       };
     case types.GET_USERS_BY_GROUP_FAILURE:
       return {
@@ -130,7 +130,7 @@ export default function groupsReducer(state: State = initialState, action: Actio
       return {
         ...state,
         error: false,
-        errorMessage: ""
+        errorMessage: ''
       };
     case types.UPDATE_GROUP_SUCCESS:
       return {

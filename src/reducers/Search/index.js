@@ -18,7 +18,7 @@ type Action = {
   +data: Object
 }
 
-export default function usersReducer(state: State = initialState, action: Action): State {
+export default function searchReducer(state: State = initialState, action: Action): State {
   const { data } = action;
 
   switch (action.type){
